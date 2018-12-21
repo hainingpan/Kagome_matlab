@@ -1,5 +1,8 @@
-function re=coa(m,n)
-global d a h b1 b2
+function re=coa(m,n,parameters)
+%coeffecient of Fourier series a_{m,n}
+d=parameters.d;
+a=parameters.a;
+h=parameters.h;
 re=zeros(length(m),length(n));
 l1=((n==0)&(m==0));
 l2=~l1;
