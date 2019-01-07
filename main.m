@@ -19,12 +19,14 @@
 %gamma: linewidth on energy axis
 
 
-parameters=struct('a',5.076,'d',15,'h',5e-3,'mu',24,'g',5.75e-3,'mx',400*3.6*5.11,'eph',0,'eexc',0,'dtn',-17.9/1000,'Nmax',5,'cellnumber',400,'NN',200,'Nk',100,'gammakraw',2.74E-01*0.5,'gamma',1.87E-05);
+parameters=struct('a',5.076,'d',15,'h',5e-3,'mu',24,'g',5.75e-3,'mx',400*3.6*5.11,'eph',0,'eexc',0,'dtn',-17.9/1000,'Nmax',5,'cellnumber',400,'NN',200,'Nk',200,'gammakraw',2.74E-01*0.5,'gamma',1.87E-05);
 
 parameters.b1=2*pi/parameters.d*sqrt(3)/2*[1/sqrt(3) -1/3];
 parameters.b2=2*pi/parameters.d*sqrt(3)/2*[0 2/3];
 parameters.areadiamond=3*sqrt(3)/2*parameters.d^2*4/3;
-
+parameters.xr=(2*pi)/(3*parameters.d);
+parameters.xcr=(2*pi)/(6*parameters.d);
+parameters.yc=(pi)/(sqrt(3)*parameters.d);
 % Fourier Transformation
 parameters.coarr=zeros(4*parameters.Nmax+1);
 for n=-2*parameters.Nmax:2*parameters.Nmax
