@@ -1,6 +1,6 @@
-savecur=zeros(parameters.Nk,parameters.Nk,5);
-for index=1:5
+savecur=zeros(parameters.Nk,parameters.Nk);
+for index=1:10
     disp(index);
-    savecur(:,:,index)=berrycur(index,parameters);
+    savecur=berrycur(index,parameters);
+    save(strcat('savecurN',num2str(index),'.mat'),'savecur');
 end
-save('savecur.mat','savecur');

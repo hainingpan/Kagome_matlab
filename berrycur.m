@@ -1,6 +1,6 @@
 function curvature=berrycur(n,parameters)
 areadiamond=parameters.areadiamond;
-% n=3;
+n=1;
 nor=sqrt(areadiamond);
 d=parameters.d;
 Nk=parameters.Nk;
@@ -14,12 +14,15 @@ ylist=linspace(0,sqrt(3)*d,NN);
 [xgrid,ygrid]=meshgrid(xlist,ylist);
 % wf=zeros(kx,ky,x,y)
 wf=zeros(Nk,Nk,NN,NN);
-for xindex=1:Nk
+parfor xindex=1:Nk
     for yindex=1:Nk
         kx=kxlist(xindex);
         ky=kylist(yindex);
-        tmp=um(n,kx,ky,xgrid,ygrid,parameters)/nor;        
-        wf(xindex,yindex,:,:)=((real(tmp)<0)*(-1)+(real(tmp)>=0)).*tmp;
+        tmp=um(n,kx,ky,xgrid,ygrid,parameters)/nor;
+        psic=tmp(NN/2,NN/2);
+        factor=abs(psic)/psic;        
+       %         wf(xindex,yindex,:,:)=tmp;
+       wf(xindex,yindex,:,:)=tmp*factor;
     end
 end
 wfdx=zeros(Nk,Nk,NN,NN);
