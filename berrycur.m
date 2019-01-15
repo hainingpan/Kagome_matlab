@@ -1,6 +1,6 @@
 function curvature=berrycur(n,parameters)
 areadiamond=parameters.areadiamond;
-n=1;
+% n=1;
 nor=sqrt(areadiamond);
 d=parameters.d;
 Nk=parameters.Nk;
