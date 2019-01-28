@@ -1,15 +1,15 @@
-bc=cell(10);
+bc=cell(10,1);
 d=parameters.d;
 Nk=parameters.Nk;
 xr=(2*pi)/(3*d);
 yc=(pi)/(sqrt(3)*d);
 kxlist=linspace(-xr,xr,Nk);
 kylist=linspace(-yc,yc,Nk);
-for index=9:9
-    bc{index}=load(strcat('545/savecurN',num2str(index),'.mat'),'savecur');
+for index=1:9
+    bc{index}=load(strcat('543/savecurN',num2str(index),'.mat'),'savecur');
     bc{index}=bc{index}.savecur;
 end
-for index=9:9
+for index=1:9
     figure;surf(kxlist,kylist,bc{index}','edgecolor','none');view(2);colorbar;
     hold on;
     line([xr,xr/2,-xr/2,-xr,-xr/2,xr/2,xr],[0,yc,yc,0,-yc,-yc,0],1e7*ones(7,1),'Color','k');
@@ -22,5 +22,5 @@ for index=9:9
     hold on;
     line([xr,xr/2,-xr/2,-xr,-xr/2,xr/2,xr],[0,yc,yc,0,-yc,-yc,0],1e7*ones(7,1),'Color','k');
     axis tight;
-    saveas(gcf,strcat('.\fig\545\KagometanhN',num2str(index),'.png'));
+    saveas(gcf,strcat('.\fig\543\KagometanhN',num2str(index),'.png'));
 end 
