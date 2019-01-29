@@ -1,9 +1,10 @@
-function ham=Htb(latticeconst,parameters)
+function ham=Htb(parameters)
 a=parameters.a;
 d=parameters.d;
 h=parameters.h;
 mu=parameters.mu;
 NN=parameters.NN;
+latticeconst=sqrt(parameters.cellnumber)*(2*d)/NN;
 
 t=1/(2*mu*latticeconst^2);
 diag=spdiags([ones(NN,1)  -4*ones(NN,1) ones(NN,1)],[-1,0,1],NN,NN);

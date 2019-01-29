@@ -19,7 +19,7 @@
 %gamma: linewidth on energy axis
 
 
-parameters=struct('a',5.076,'a2',5.076,'a3',5.076,'d',15,'h',5e-3,'h2',4e-3,'h3',3e-3,'mu',24,'g',5.75e-3,'mx',400*3.6*5.11,'eph',0,'eexc',0,'dtn',-17.9/1000,'Nmax',5,'cellnumber',400,'NN',100,'Nk',100,'gammakraw',2.74E-01*0.5,'gamma',1.87E-05);
+parameters=struct('a',5.076,'a2',5.076,'a3',5.076,'d',15,'h',5e-3,'h2',5e-3,'h3',5e-3,'mu',24,'g',5.75e-3,'mx',400*3.6*5.11,'eph',0,'eexc',0,'dtn',-17.9/1000,'Nmax',5,'cellnumber',25,'NN',100,'Nk',100,'gammakraw',2.74E-01*0.5,'gamma',1.87E-05);
 
 parameters.b1=2*pi/parameters.d*sqrt(3)/2*[1/sqrt(3) -1/3];
 parameters.b2=2*pi/parameters.d*sqrt(3)/2*[0 2/3];
