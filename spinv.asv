@@ -1,0 +1,18 @@
+function G=spinv(A)
+% A=sprand(10,10,0.1)+1i*sprand(10,10,0.1);
+[L,U]=lu(A);
+d=diag(U);
+if (any (d == 0))
+        error ('not full rank') ;
+end
+D=diag(d);
+U=D\U;
+G=speye(2);
+Di=diag(1./d);
+I=eye(length(A));
+for i=1:100
+    G=Di/L+(I-U)*G
+end
+end
+
+
