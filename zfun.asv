@@ -1,0 +1,42 @@
+function [re,z,cal]=zfun(i,j,z,cal,C,L,d,U)
+n=length(cal);
+if cal(i,j)==1
+    re=z(i,j);
+else
+    %diagonal
+    if (i==j)
+    c=C(i,i+1:n);
+    c=padarray(c,[0,i],'pre');
+    citer=1:n;
+    citer=citer(c);
+    for k=citer
+        [~,z,cal]=zfun(k,i,z,cal,C,L,d,U);
+    end
+    z(i,j)=1/d(i)-U(i,c)*z(c,i);
+    cal(i,j)=1;
+    re=z(i,j);
+    else
+        %upper tri
+        if (i<j)
+            c=C()
+            for k=i+1:n
+                [~,z,cal]=zfun(k,i,z,cal,C,L,d,U);
+            end
+            z(i,j)=-U(i,i+1:n)*z(i+1:n,j);
+            cal(i,j)=1;
+            re=z(i,j);
+        else
+            %lower tri
+            for k=j+1:n
+                [~,z,cal]=zfun(i,k,z,cal,C,L,d,U);
+            end
+            z(i,j)=-z(i,j+1:n)*L(j+1:n,j);
+            cal(i,j)=1;
+            re=z(i,j);
+        end
+    end
+end
+end
+                
+        
+    
