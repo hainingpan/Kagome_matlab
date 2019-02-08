@@ -89,14 +89,13 @@ for i=n:-1:1
 %     Lsp=sparse(il(Lcolumnindex),ones(length(Lcolumnindex),1),kl(Lcolumnindex),n,1);
 %     Lsptmp=Lsp(i+1:n);
 %     Lsptmp=L(i+1:n,i);
-    disp(i);
     c=C(i+1:n,i);
     c=sparse((i+1:n)',ones(n-i,1),c',n,1);
 %     c=padarray(c,[0,i],'pre');
     citer=1:n;
     citer=citer(logical(c));
     
-    %!! three things to check :1.sparse matrix for z 2. directly take out L
+    %!! two things to check :1.sparse matrix for z 2. directly take out L
     %and U instead of running to the end 3. vectorize z(k,i)
     for k=citer
         z(k,i)=-z(k,i+1:n)*L(i+1:n,i);
@@ -121,27 +120,18 @@ for i=n:-1:1
 %     z(i,i+1:n)=-U(i,i+1:n)*z(i+1:n,i+1:n);
     z(i,i)=1/d(i)-U(i,i+1:n)*z(i+1:n,i);
 end
-diaglist=zeros(n,1);
-[ip,jp,~]=find(P);
-for di=1:n
-    i=ip(di);
-    j=jp(di);
-    if(C(i,j))
-        val=z(i,j);
+[ip,jp,kp]=find(P);
+for i=1:n
+    icor=ip(i);
+    jcor=jp(i);
+    if(C(icor,jcor))
+        val=z(icor,jcor);
     else
-        if (i==j)
-            val=1/d(i)-U(i,i+1:n)*z(i+1:n,i);
-        else
-            if i<j
-                val=-U(i,i+1:n)*z(i+1:n,j);
-            else
-                val=-z(i,j+1:n)*L(j+1:n,j);
-            end
-        end
-    end            
-    diaglist(i)=val;    
-end
-% ztmp=z';
-% diaglist=ztmp(logical(P));
+        if (icor==jcor)
+            
+    diaglist(i)=val;
+    
+ztmp=z';
+diaglist=ztmp(logical(P));
 end
     

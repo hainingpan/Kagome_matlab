@@ -9,7 +9,7 @@ if cal(i,j)~=1
     citer=1:n;
     citer=citer(logical(c));
     for k=citer
-        [z,cal]=zfun(k,i,z,cal,C,L,d,U);
+        [z,cal]=zfun(k,j,z,cal,C,L,d,U);
     end
     z(i,j)=1/d(i)-U(i,c)*z(c,i);
     cal(i,j)=1;
