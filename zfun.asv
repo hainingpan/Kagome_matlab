@@ -3,13 +3,13 @@ n=length(cal);
 if cal(i,j)~=1
     %diagonal
     if (i==j)
-    c=C(i+1:n,j);
+    c=C(i,i+1:n);
     c=sparse((i+1:n)',ones(n-i,1),c',n,1);
 %     c=padarray(c,[0,i],'pre');
     citer=1:n;
     citer=citer(logical(c));
     for k=citer
-        [z,cal]=zfun(k,j,z,cal,C,L,d,U);
+        [z,cal]=zfun(k,i,z,cal,C,L,d,U);
     end
     z(i,j)=1/d(i)-U(i,c)*z(c,i);
     cal(i,j)=1;
@@ -17,7 +17,7 @@ if cal(i,j)~=1
     else
         %upper tri
         if (i<j)
-            c=C(i+1:n,j);
+            c=C(i,i+1:n);
             c=sparse((i+1:n)',ones(n-i,1),c',n,1);
 %             c=padarray(c,[0,i],'pre');
             citer=1:n;

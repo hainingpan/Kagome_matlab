@@ -30,6 +30,7 @@ for i=n:-1:1
     diaglist(i)=z(i,j);
 %     t(i)=toc;
 end
+
 end
 
 

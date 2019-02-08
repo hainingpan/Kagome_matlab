@@ -14,6 +14,7 @@ CD=spones(D);
 CU=spones(U);
 C=spones(CL+CU+CD);
 C=logical(C);
+C=full(C);
 % cal=zeros(n);
 % diaglist=zeros(n,1);
 % z=sparse(n,n);
@@ -83,14 +84,25 @@ z=zeros(n);
 % end
 % uend(prevendindex)= length(ju);         
 
+%%find a new zc
+zc=false(n);
+visit=false(n);
+[ip,jp,~]=find(P);
+for di=1:n
+    i=jp(di);
+    j=ip(di);
+    if ~(visit(i,j))
+        [zc,visit]=zcfun_mex(i,j,zc,visit,C,n);
+    end
+end
 
 for i=n:-1:1    
 %     Lcolumnindex=lstart(i):lend(i);
 %     Lsp=sparse(il(Lcolumnindex),ones(length(Lcolumnindex),1),kl(Lcolumnindex),n,1);
 %     Lsptmp=Lsp(i+1:n);
 %     Lsptmp=L(i+1:n,i);
-    disp(i);
-    c=C(i+1:n,i);
+%     disp(i);
+   c=zc(i+1:n,i);
     c=sparse((i+1:n)',ones(n-i,1),c',n,1);
 %     c=padarray(c,[0,i],'pre');
     citer=1:n;
@@ -109,7 +121,7 @@ for i=n:-1:1
 %     Usp=sparse(ones(length(Urowindex),1),iu(Urowindex),ku(Urowindex),1,n); 
 %     Usptmp=Usp(i+1:n);
 %     Usptmp=U(i,i+1:n);
-    c=C(i,i+1:n);
+ c=zc(i,i+1:n);    
     c=sparse((i+1:n)',ones(n-i,1),c',n,1);
 %             c=padarray(c,[0,j],'pre');
     citer=1:n;
@@ -121,12 +133,14 @@ for i=n:-1:1
 %     z(i,i+1:n)=-U(i,i+1:n)*z(i+1:n,i+1:n);
     z(i,i)=1/d(i)-U(i,i+1:n)*z(i+1:n,i);
 end
+% disp(z);
+% disp(full(zc));
 diaglist=zeros(n,1);
-[ip,jp,~]=find(P);
+
 for di=1:n
-    i=ip(di);
-    j=jp(di);
-    if(C(i,j))
+    i=jp(di);
+    j=ip(di);
+    if(zc(i,j))
         val=z(i,j);
     else
         if (i==j)
@@ -139,8 +153,10 @@ for di=1:n
             end
         end
     end            
-    diaglist(i)=val;    
+    diaglist(i)=val;
+    z(i,j)=val;
 end
+% disp(z);
 % ztmp=z';
 % diaglist=ztmp(logical(P));
 end
