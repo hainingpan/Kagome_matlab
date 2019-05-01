@@ -1,7 +1,7 @@
-function h=Htb()
-a=0.1;
-L=100;
-v0=1;
+function h=Htb(L,a,v0)
+% a=0.1;
+% L=100;
+% v0=0;
 n=floor(L/a);
 vlist=2*v0*cos(linspace(0,L,n));
 t=1/(2*a^2);

@@ -1,15 +1,17 @@
-delta=1e-3;
-h=Htb();
+delta=1e-1;
+L=128;
+a=.01;
+v0=1;
+h=Htb(L,a,v0);
 [vec,val]=eig(full(h));
 val=diag(val);
-vec2=reshape(vec,[length(h),length(h)]);
-vecf=fft(vec2);
+vecf=fft(vec);
 
 for i=1:length(vecf)
 vecf(:,i)=fftshift(vecf(:,i));
 end
 
-enlist=-1:0.1:10;
+enlist=-1:0.01:20;
 enmap=zeros(length(h),length(enlist));
 
 
@@ -18,4 +20,18 @@ deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,length(h)]);
 psif=abs(vecf).^2;
 enmap(:,i)=sum(deltaf.*psif,2);
 end
+n=L/a;
+klist=2*pi/L*(-floor(n/2):floor((n-1)/2));
 
+enmap2=zeros(11,length(klist));
+for i=1:length(klist)
+    k=klist(i);
+    enmap2(:,i)=eig(Hb(k,v0));
+end
+figure;surf(klist,enlist,log(enmap')-10,'edgecolor','none');view(2);
+hold on;
+plot3(klist,enmap2',2500*ones(length(klist),1))
+ylim([-1,20]);
+% e2=1/2*(klist).^2;
+% hold on;
+% plot(klist,e2);
