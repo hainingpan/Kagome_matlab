@@ -1,6 +1,6 @@
 delta=1e-1;
-L=128;
-a=.01;
+L=100;
+a=.1;
 v0=1;
 h=Htb(L,a,v0);
 [vec,val]=eig(full(h));
@@ -11,7 +11,7 @@ for i=1:length(vecf)
 vecf(:,i)=fftshift(vecf(:,i));
 end
 
-enlist=-1:0.01:20;
+enlist=-1:0.01:30;
 enmap=zeros(length(h),length(enlist));
 
 
@@ -31,7 +31,7 @@ end
 figure;surf(klist,enlist,log(enmap')-10,'edgecolor','none');view(2);
 hold on;
 plot3(klist,enmap2',2500*ones(length(klist),1))
-ylim([-1,20]);
+ylim([-1,30]);
 % e2=1/2*(klist).^2;
 % hold on;
 % plot(klist,e2);
