@@ -3,7 +3,7 @@ h=Htb(parameters);
 val=diag(val);
 vec2=reshape(vec,[sqrt(length(h)),sqrt(length(h)),length(h)]);
 vecf=fft2(vec2);
-parfor i=1:length(h)
+for i=1:length(h)
 vecf(:,:,i)=fftshift(vecf(:,:,i));
 end
 
@@ -13,12 +13,14 @@ enmapr=zeros(sqrt(length(h)),sqrt(length(h)),length(enlist));
 
 delta=1e-4;
 parfor i=1:length(enlist)
+fprintf("i_k=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(h)]);
 psif=abs(vecf).^2;
 enmapk(:,:,i)=sum(deltaf.*psif,3);
 end
 
 parfor i=1:length(enlist)
+fprintf("i_r=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(h)]);
 psi=abs(vec2).^2;
 enmapr(:,:,i)=sum(deltaf.*psi,3);
