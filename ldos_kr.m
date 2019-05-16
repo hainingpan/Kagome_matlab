@@ -6,7 +6,8 @@ toc;
 val=diag(val);
 vec2=reshape(vec,[sqrt(length(h)),sqrt(length(h)),length(h)]);
 vecf=fft2(vec2);
-for i=1:length(h)
+parfor i=1:length(h)
+fprintf("i_f=%d\n",i);
 vecf(:,:,i)=fftshift(vecf(:,:,i));
 end
 
