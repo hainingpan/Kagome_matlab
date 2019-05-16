@@ -1,5 +1,8 @@
 h=Htb(parameters);
+tic;
+fprintf("diagonalizing...\n");
 [vec,val]=eig(full(h));
+toc;
 val=diag(val);
 vec2=reshape(vec,[sqrt(length(h)),sqrt(length(h)),length(h)]);
 vecf=fft2(vec2);
@@ -27,6 +30,30 @@ enmapr(:,:,i)=sum(deltaf.*psi,3);
 end
 
 save(sprintf("NN%dCN%d.mat",parameters.NN,parameters.cellnumber),'-v7.3');
-% figure;surf(sqrt(3)*(-floor(parameters.NN/2):floor((parameters.NN-1)/2))/(2*sqrt(parameters.cellnumber)),enlist,squeeze(log(enmapk(:,parameters.NN/2,:)))','edgecolor','none');view(2);
+% figure;surf(sqrt(3)*(-floor(parameters.NN/2):floor((parameters.NN-1)/2))/(2*sqrt(parameters.cellnumber)),1000*enlist,squeeze(log(enmapk(:,parameters.NN/2,:)))','edgecolor','none');view(2);
 % xlim([-4,4]);
+klist=(-floor(parameters.NN/2):floor((parameters.NN-1)/2))*2*pi/(2*parameters.d*sqrt(parameters.cellnumber)/5.076);
 
+for i=1:length(enlist)
+surf(klist,klist,log(enmapk(:,:,i)'+50),'edgecolor','none');view(2);
+axis square;
+axis tight
+xlabel('k_x(1/\mum)')
+ylabel('k_y(1/\mum)')
+colorbar
+title(sprintf("E=%.2f(meV)",1000*enlist(i)));
+axis([-5,5,-5,5]);
+saveas(gcf,sprintf("Ek\\E%.2f.png",1000*enlist(i)));
+end
+
+rlist=linspace(0,sqrt(parameters.cellnumber)*2*parameters.d/5.076,parameters.NN);
+for i=1:length(enlist)
+surf(rlist,rlist,log(enmapr(:,:,i)'+50),'edgecolor','none');view(2);
+axis square;
+axis tight
+xlabel('x(\mum)')
+ylabel('y(\mum)')
+colorbar
+title(sprintf("E=%.2f(meV)",1000*enlist(i)));
+saveas(gcf,sprintf("Er\\E%.2f.png",1000*enlist(i)));
+end
