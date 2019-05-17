@@ -56,7 +56,7 @@ axis tight
 xlabel('x(\mum)')
 ylabel('y(\mum)')
 colorbar
-caxis([log(min(enmapr(:))+50),log(max(enmapr(:))+50)])
+caxis([log(min(enmapr(:))+50),log(max(enmapr(:))+50)]);
 axis
 title(sprintf("E=%.2f(meV)",1000*enlist(i)));
 saveas(gcf,sprintf("Er//E%.2f.png",1000*enlist(i)));
