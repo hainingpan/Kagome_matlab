@@ -42,6 +42,7 @@ axis tight
 xlabel('k_x(1/\mum)')
 ylabel('k_y(1/\mum)')
 colorbar
+caxis([log(min(enmapk(:))+50),log(max(enmapk(:))+50)])
 title(sprintf("E=%.2f(meV)",1000*enlist(i)));
 axis([-5,5,-5,5]);
 saveas(gcf,sprintf("Ek//E%.2f.png",1000*enlist(i)));
@@ -55,6 +56,8 @@ axis tight
 xlabel('x(\mum)')
 ylabel('y(\mum)')
 colorbar
+caxis([log(min(enmapr(:))+50),log(max(enmapr(:))+50)])
+axis
 title(sprintf("E=%.2f(meV)",1000*enlist(i)));
 saveas(gcf,sprintf("Er//E%.2f.png",1000*enlist(i)));
 end
