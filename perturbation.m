@@ -7,7 +7,7 @@ val=val+g*pert';
 
 vec2=reshape(vec,[sqrt(length(vec)),sqrt(length(vec)),length(vec)]);
 vecf=fft2(vec2);
-for i=1:length(vec)
+parfor i=1:length(vec)
 fprintf("i_f=%d\n",i);
 vecf(:,:,i)=fftshift(vecf(:,:,i));
 end
@@ -17,14 +17,14 @@ enmapk=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 enmapr=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 
 delta=1e-4;
-for i=1:length(enlist)
+parfor i=1:length(enlist)
 fprintf("i_k=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(vec)]);
 psif=abs(vecf).^2;
 enmapk(:,:,i)=sum(deltaf.*psif,3);
 end
 
-for i=1:length(enlist)
+parfor i=1:length(enlist)
 fprintf("i_r=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(vec)]);
 psi=abs(vec2).^2;
