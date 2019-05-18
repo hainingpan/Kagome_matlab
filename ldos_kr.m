@@ -1,15 +1,15 @@
-% h=Htb(parameters);
-% tic;
-% fprintf("diagonalizing...\n");
-% [vec,val]=eig(full(h));
-% toc;
-% val=diag(val);
-% vec2=reshape(vec,[sqrt(length(h)),sqrt(length(h)),length(h)]);
-% vecf=fft2(vec2);
-% parfor i=1:length(h)
-% fprintf("i_f=%d\n",i);
-% vecf(:,:,i)=fftshift(vecf(:,:,i));
-% end
+h=Htb(parameters);
+tic;
+fprintf("diagonalizing...\n");
+[vec,val]=eig(full(h));
+toc;
+val=diag(val);
+vec2=reshape(vec,[sqrt(length(h)),sqrt(length(h)),length(h)]);
+vecf=fft2(vec2);
+parfor i=1:length(h)
+fprintf("i_f=%d\n",i);
+vecf(:,:,i)=fftshift(vecf(:,:,i));
+end
 % 
 % enlist=-5e-3:0.05e-3:15e-3;
 % enmapk=zeros(sqrt(length(h)),sqrt(length(h)),length(enlist));
