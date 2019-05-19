@@ -17,17 +17,17 @@ enmapk=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 enmapr=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 
 delta=1e-4;
+psif=abs(vecf).^2;
 parfor i=1:length(enlist)
 fprintf("i_k=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(vec)]);
-psif=abs(vecf).^2;
 enmapk(:,:,i)=sum(deltaf.*psif,3);
 end
 
+psi=abs(vec2).^2;
 parfor i=1:length(enlist)
 fprintf("i_r=%d\n",i);
 deltaf=reshape(delta./((enlist(i)-val).^2+delta^2),[1,1,length(vec)]);
-psi=abs(vec2).^2;
 enmapr(:,:,i)=sum(deltaf.*psi,3);
 end
 
