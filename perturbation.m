@@ -1,16 +1,16 @@
-function perturbation(g,val,vec,parameters)
+function perturbation(g,val,vec,vecf,parameters)
 % g=0.01;
 pert=sum(abs(vec).^4,1);
-fprintf("perturbation term, max:%f, min:%f, mean:%f",1000*g*max(pert),1000*g*min(pert),1000*g*mean(pert));
+fprintf("perturbation term, max:%f, min:%f, mean:%f\n Energy max:%f, min%f ",1000*g*max(pert),1000*g*min(pert),1000*g*mean(pert),1000*max(val),min(val));
 
 val=val+g*pert';
 
 vec2=reshape(vec,[sqrt(length(vec)),sqrt(length(vec)),length(vec)]);
-vecf=fft2(vec2);
-parfor i=1:length(vec)
-fprintf("i_f=%d\n",i);
-vecf(:,:,i)=fftshift(vecf(:,:,i));
-end
+% vecf=fft2(vec2);
+% parfor i=1:length(vec)
+% fprintf("i_f=%d\n",i);
+% vecf(:,:,i)=fftshift(vecf(:,:,i));
+% end
 
 enlist=-5e-3:0.05e-3:15e-3;
 enmapk=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
