@@ -12,7 +12,7 @@ vec2=reshape(vec,[sqrt(length(vec)),sqrt(length(vec)),length(vec)]);
 % vecf(:,:,i)=fftshift(vecf(:,:,i));
 % end
 
-enlist=-5e-3:0.05e-3:50e-3;
+enlist=-5e-3:0.05e-3:30e-3;
 enmapk=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 enmapr=zeros(sqrt(length(vec)),sqrt(length(vec)),length(enlist));
 
