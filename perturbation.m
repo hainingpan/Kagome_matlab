@@ -37,8 +37,10 @@ figure;surf(sqrt(3)*(-floor(parameters.NN/2):floor((parameters.NN-1)/2))/(2*sqrt
 colorbar;
 xlim([-4,4]);
 savefig(gcf,sprintf("NN%dCN%dg%.3f.fig",parameters.NN,parameters.cellnumber,g));
-
-mkdir(sprintf("Ekg%.4f",g));
+filelock=sprintf("Ekg%.4f",g);
+if ~exist(filelock,'dir')
+    mkdir(filelock);
+end
 for i=1:length(enlist)
 surf(klist,klist,log(enmapk(:,:,i)'+50),'edgecolor','none');view(2);
 axis square;
@@ -51,9 +53,9 @@ title(sprintf("E=%.2f(meV)",1000*enlist(i)));
 axis([-5,5,-5,5]);
 saveas(gcf,sprintf("Ekg%.4f//E%.2f.png",g,1000*enlist(i)));
 end
-fileloc=sprintf("Erg%.4f",g);
-if ~exist(fileloc,'dir')
-mkdir(sprintf("Erg%.4f",g));
+filelocr=sprintf("Erg%.4f",g);
+if ~exist(filelocr,'dir')
+    mkdir(filelocr);
 end
 
 rlist=linspace(0,sqrt(parameters.cellnumber)*2*parameters.d/5.076,parameters.NN);
