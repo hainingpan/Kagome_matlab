@@ -1,11 +1,11 @@
-% h=Htbcp(parameters);
-% tic;
-% fprintf("diagonalizing...\n");
-% [vec,val]=eig(full(h));
-% toc;
-% val=diag(val);
-% vec=vec(1:parameters.NN^2,1:parameters.NN^2);
-% val=val(1:parameters.NN^2);
+h=Htbcp(parameters);
+tic;
+fprintf("diagonalizing...\n");
+[vec,val]=eig(full(h));
+toc;
+val=diag(val);
+vec=vec(1:parameters.NN^2,1:parameters.NN^2);
+val=val(1:parameters.NN^2);
 vec2=reshape(vec,[parameters.NN,parameters.NN,parameters.NN^2]);
 vecf=fft2(vec2);
 parfor i=1:parameters.NN^2
@@ -63,7 +63,6 @@ xlabel('x(\mum)')
 ylabel('y(\mum)')
 colorbar
 caxis([log(min(enmapr(:))+50),log(max(enmapr(:))+50)]);
-axis
 title(sprintf("E=%.2f(meV)",1000*enlist(i)));
 saveas(gcf,sprintf("ErdD%.1f//E%.2f.png",1000*parameters.dtn,1000*enlist(i)));
 end
