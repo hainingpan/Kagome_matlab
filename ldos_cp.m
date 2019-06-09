@@ -13,7 +13,7 @@ fprintf("i_f=%d\n",i);
 vecf(:,:,i)=fftshift(vecf(:,:,i));
 end
 
-enlist=-15e-3:0.05e-3:15e-3;
+enlist=-10e-3:0.05e-3:0e-3;
 enmapk=zeros(parameters.NN,parameters.NN,length(enlist));
 enmapr=zeros(parameters.NN,parameters.NN,length(enlist));
 
