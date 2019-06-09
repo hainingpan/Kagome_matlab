@@ -41,7 +41,7 @@ colorbar;
 klist=(-floor(parameters.NN/2):floor((parameters.NN-1)/2))*2*pi/(2*parameters.d*sqrt(parameters.cellnumber)/5.076);
 savefig(gcf,sprintf("NN%dCN%dD%.1f.fig",parameters.NN,parameters.cellnumber,1000*parameters.dtn));
 
-filelock=sprintf("EkdD%.1f//E%.2f.png",1000*parameters.dtn,1000*enlist(i));
+filelock=sprintf("EkdD%.1f",1000*parameters.dtn);
 if ~exist(filelock,'dir')
     mkdir(filelock);
 end
@@ -59,7 +59,7 @@ axis([-5,5,-5,5]);
 saveas(gcf,sprintf("EkdD%.1f//E%.2f.png",1000*parameters.dtn,1000*enlist(i)));
 end
 
-filelocr=sprintf("ErdD%.1f//E%.2f.png",1000*parameters.dtn,1000*enlist(i));
+filelocr=sprintf("ErdD%.1f",1000*parameters.dtn);
 if ~exist(filelocr,'dir')
     mkdir(filelocr);
 end
