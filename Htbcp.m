@@ -23,7 +23,7 @@ ylist=(1:NN)*latticeconst;
 [xgrid,ygrid]=meshgrid(xlist,ylist);
 re=vm(xgrid,ygrid,parameters);
 hamph=-t*(kron(diag,eyesm)+kron(eyesm,spdiags([ones(NN,1) ones(NN,1)],[-1,1],NN,NN)))+spdiags(re(:)+eph+dtn,0,NN^2,NN^2);
-hamx=-tx*(kron(diag,eyesm)+kron(eyesm,spdiags([ones(NN,1) ones(NN,1)],[-1,1],NN,NN)))+(eexc+dtn)*speye(NN^2,NN^2);
+hamx=-tx*(kron(diag,eyesm)+kron(eyesm,spdiags([ones(NN,1) ones(NN,1)],[-1,1],NN,NN)))+(eexc)*speye(NN^2,NN^2);
 hcp=g*speye(NN^2,NN^2);
 ham=[hamph,hcp;hcp,hamx];
 end
