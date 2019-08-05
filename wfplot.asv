@@ -1,0 +1,5 @@
+XX=linspace(-50,50,100);
+YY=XX;
+[X,Y]=meshgrid(XX,YY);
+UU=um(1,K2(1),K2(2),X,Y,parameters);
+imagesc(abs(UU));
