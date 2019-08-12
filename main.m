@@ -35,7 +35,7 @@ parameters.yc=(pi)/(sqrt(3)*parameters.d);
 parameters.coarr=zeros(4*parameters.Nmax+1);
 for n=-2*parameters.Nmax:2*parameters.Nmax
     for m=-2*parameters.Nmax:2*parameters.Nmax
-        parameters.coarr(n+2*parameters.Nmax+1,m+2*parameters.Nmax+1)=coa_var(n,m,parameters);
+        parameters.coarr(n+2*parameters.Nmax+1,m+2*parameters.Nmax+1)=coa(n,m,parameters);
     end
 end
 [X,Y]=meshgrid(-parameters.Nmax:parameters.Nmax,-parameters.Nmax:parameters.Nmax);

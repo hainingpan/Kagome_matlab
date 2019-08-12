@@ -1,5 +1,5 @@
 function re=um(n,kx,ky,x,y,parameters)
-%Bloch wavefunction(without exp(-ikx)part ) in real space at (kx,ky) unnormalized.
+%Bloch wavefunction(without exp(-ikr)part ) in real space at (kx,ky) unnormalized.
 %kx,ky should be scalars. 
 %x,y can be grids
 areadiamond=parameters.areadiamond;
